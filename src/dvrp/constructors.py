@@ -1,43 +1,52 @@
 from typing import List
 
-from dvrp.cost import is_capacity_feasible
-from dvrp.models import Customer, Route, Solution, Vehicle
+from dvrp.models import Customer, Vehicle, Route, Solution
+from dvrp.cost import is_capacity_feasible, euclidean
 
 
-def greedy_capacity_assignment(
+def nearest_neighbor_constructor(
     depot: Customer,
     customers: List[Customer],
     vehicles: List[Vehicle],
 ) -> Solution:
     """
-    Simple greedy assignment:
-    Fill vehicles sequentially until capacity reached.
+    Greedy nearest neighbor VRP constructor.
+    Builds routes by repeatedly selecting the closest feasible customer.
     """
-    solution = Solution()
 
-    customer_index = 0
+    unassigned = customers.copy()
+    solution = Solution()
 
     for vehicle in vehicles:
         route = Route(vehicle)
-        while customer_index < len(customers):
-            candidate = customers[customer_index]
-            temp_customers = route.customers + [candidate]
+        current_location = depot
 
-            if is_capacity_feasible(temp_customers, vehicle.capacity):
-                route.add_customer(candidate)
-                customer_index += 1
-            else:
+        while unassigned:
+            # Filter feasible customers
+            feasible = [
+                c for c in unassigned
+                if is_capacity_feasible(route.customers + [c], vehicle.capacity)
+            ]
+
+            if not feasible:
                 break
+
+            # Choose nearest feasible customer
+            next_customer = min(
+                feasible,
+                key=lambda c: euclidean(current_location, c)
+            )
+
+            route.add_customer(next_customer)
+            unassigned.remove(next_customer)
+            current_location = next_customer
 
         solution.add_route(route)
 
-        if customer_index >= len(customers):
+        if not unassigned:
             break
 
     return solution
-from typing import List
-from dvrp.models import Customer, Vehicle, Route, Solution
-from dvrp.cost import is_capacity_feasible
 
 
 def greedy_capacity_assignment(
@@ -50,7 +59,6 @@ def greedy_capacity_assignment(
     Fill vehicles sequentially until capacity reached.
     """
     solution = Solution()
-
     customer_index = 0
 
     for vehicle in vehicles:
