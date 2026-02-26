@@ -1,7 +1,6 @@
 __pycache__/
 *.pyc
 .venv/
-.env
-.DS_Store
-.idea/
-.vscode/
+experiments/*.png
+experiments/*.csv
+src/dvrp.egg-info/
