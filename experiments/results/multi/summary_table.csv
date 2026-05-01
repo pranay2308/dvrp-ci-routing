@@ -1,0 +1,22 @@
+instance,type,method,final_cost,avg_latency,max_latency,acceptance,avg_stability
+C101,Clustered,FACI-DVRP (ACO+Fuzzy),1988.4,2.5,4.3,32/32,0.988
+C101,Clustered,ACO+Multi-Fuzzy,1988.4,2.5,4.3,32/32,0.988
+C101,Clustered,ACO+Threshold,1988.4,2.7,9.9,32/32,0.988
+C101,Clustered,GA+Fuzzy,2426.1,2.6,7.6,32/32,0.988
+C101,Clustered,ACO+Repair (fixed),1988.4,2.5,4.5,32/32,0.988
+C101,Clustered,Full Re-opt,1666.1,3.4,4.7,32/32,0.9
+C101,Clustered,Static,1156.0,0.0,0.0,0/32,1.0
+R101,Random,FACI-DVRP (ACO+Fuzzy),1697.5,3.6,7.4,32/32,0.988
+R101,Random,ACO+Multi-Fuzzy,1697.5,3.5,7.1,32/32,0.988
+R101,Random,ACO+Threshold,1697.5,3.6,7.9,32/32,0.988
+R101,Random,GA+Fuzzy,2167.2,2.9,5.2,32/32,0.988
+R101,Random,ACO+Repair (fixed),1697.5,3.8,9.4,32/32,0.988
+R101,Random,Full Re-opt,1526.7,3.4,4.7,32/32,0.856
+R101,Random,Static,1085.0,0.0,0.0,0/32,1.0
+RC101,Mixed,FACI-DVRP (ACO+Fuzzy),2135.2,3.7,8.9,32/32,0.988
+RC101,Mixed,ACO+Multi-Fuzzy,2135.2,3.7,8.8,32/32,0.988
+RC101,Mixed,ACO+Threshold,2135.2,3.7,9.2,32/32,0.988
+RC101,Mixed,GA+Fuzzy,2635.1,2.7,6.0,32/32,0.988
+RC101,Mixed,ACO+Repair (fixed),2135.2,3.9,9.5,32/32,0.988
+RC101,Mixed,Full Re-opt,1802.4,3.5,4.8,32/32,0.809
+RC101,Mixed,Static,1328.6,0.0,0.0,0/32,1.0

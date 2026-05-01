@@ -1,0 +1,50 @@
+==================================================================================
+ABLATION STUDY  —  Solomon C101 / R101 / RC101  (seed=42, ACO constructor)
+==================================================================================
+Component contributions:
+  Config 1→2: value of insertion repair
+  Config 2→3: value of fuzzy budget (same repair, adaptive ceiling)
+  Config 3→4: value of 2-opt local search + cross-route relocate
+
+
+  C101  [Clustered]
+  ----------------------------------------------------------------------------
+  Config                                         Cost  Avg ms   Accept    Stab
+  ----------------------------------------------------------------------------
+  1 ACO only (static)                          1156.0     0.0     0/32     1.0
+  2 ACO + Insertion (fixed, no 2-opt)          2138.7     1.3    32/32     1.0
+                                             Δcost vs prev: +982.7
+  3 ACO + Fuzzy + Insertion (no 2-opt)         2138.7     1.2    32/32     1.0
+                                             Δcost vs prev: +0.0
+  * ACO + Fuzzy + Repair (FACI-DVRP)           1988.4     2.5    32/32   0.988
+                                             Δcost vs prev: -150.3
+  ----------------------------------------------------------------------------
+
+  R101  [Random]
+  ----------------------------------------------------------------------------
+  Config                                         Cost  Avg ms   Accept    Stab
+  ----------------------------------------------------------------------------
+  1 ACO only (static)                          1085.0     0.0     0/32     1.0
+  2 ACO + Insertion (fixed, no 2-opt)          2005.3     1.3    32/32     1.0
+                                             Δcost vs prev: +920.3
+  3 ACO + Fuzzy + Insertion (no 2-opt)         2005.3     1.5    32/32     1.0
+                                             Δcost vs prev: +0.0
+  * ACO + Fuzzy + Repair (FACI-DVRP)           1697.5     3.5    32/32   0.988
+                                             Δcost vs prev: -307.8
+  ----------------------------------------------------------------------------
+
+  RC101  [Mixed]
+  ----------------------------------------------------------------------------
+  Config                                         Cost  Avg ms   Accept    Stab
+  ----------------------------------------------------------------------------
+  1 ACO only (static)                          1328.6     0.0     0/32     1.0
+  2 ACO + Insertion (fixed, no 2-opt)          2449.4     1.3    32/32     1.0
+                                             Δcost vs prev: +1120.8
+  3 ACO + Fuzzy + Insertion (no 2-opt)         2449.4     1.3    32/32     1.0
+                                             Δcost vs prev: +0.0
+  * ACO + Fuzzy + Repair (FACI-DVRP)           2135.2     3.7    32/32   0.988
+                                             Δcost vs prev: -314.2
+  ----------------------------------------------------------------------------
+
+  * = proposed method (FACI-DVRP)
+==================================================================================

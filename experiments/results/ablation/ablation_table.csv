@@ -1,0 +1,13 @@
+instance,type,method,final_cost,avg_latency,acceptance,avg_stability
+C101,Clustered,ACO only (static),1156.0,0.0,0/32,1.0
+C101,Clustered,"ACO + Insertion (fixed, no 2-opt)",2138.7,1.3,32/32,1.0
+C101,Clustered,ACO + Fuzzy + Insertion (no 2-opt),2138.7,1.2,32/32,1.0
+C101,Clustered,ACO + Fuzzy + Repair (FACI-DVRP),1988.4,2.5,32/32,0.988
+R101,Random,ACO only (static),1085.0,0.0,0/32,1.0
+R101,Random,"ACO + Insertion (fixed, no 2-opt)",2005.3,1.3,32/32,1.0
+R101,Random,ACO + Fuzzy + Insertion (no 2-opt),2005.3,1.5,32/32,1.0
+R101,Random,ACO + Fuzzy + Repair (FACI-DVRP),1697.5,3.5,32/32,0.988
+RC101,Mixed,ACO only (static),1328.6,0.0,0/32,1.0
+RC101,Mixed,"ACO + Insertion (fixed, no 2-opt)",2449.4,1.3,32/32,1.0
+RC101,Mixed,ACO + Fuzzy + Insertion (no 2-opt),2449.4,1.3,32/32,1.0
+RC101,Mixed,ACO + Fuzzy + Repair (FACI-DVRP),2135.2,3.7,32/32,0.988

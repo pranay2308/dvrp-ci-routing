@@ -1,8 +1,7 @@
-from typing import Optional
+from typing import Callable, Optional
 
 from dvrp.dynamic import insert_customer_best_position
 from dvrp.models import Customer, Solution
-from dvrp.time_budget import run_with_time_budget
 
 
 def repair_with_time_budget(
@@ -10,16 +9,16 @@ def repair_with_time_budget(
     solution: Solution,
     new_customer: Customer,
     budget_ms: int,
+    dist_fn: Optional[Callable] = None,
 ) -> Optional[Solution]:
     """
-    Try to insert a new customer within a time budget.
-    Returns a repaired solution or None if infeasible.
+    Insert a new customer into the best feasible position.
+
+    Insertion is a single deterministic O(K*n) scan — running it repeatedly
+    inside a time-budget loop produces the same result every iteration.
+    This function runs the scan once and returns immediately, leaving the
+    remaining budget available for cross-route improvement in the caller.
+
+    Returns the repaired solution or None if no feasible position exists.
     """
-
-    def step() -> Optional[Solution]:
-        return insert_customer_best_position(depot, solution, new_customer)
-
-    def accept(candidate: Optional[Solution]) -> bool:
-        return candidate is not None
-
-    return run_with_time_budget(budget_ms, step, accept)
+    return insert_customer_best_position(depot, solution, new_customer, dist_fn)
