@@ -1,4 +1,4 @@
-from typing import List
+from typing import Callable, List, Optional
 
 from dvrp.models import Customer, Vehicle, Route, Solution
 from dvrp.cost import is_capacity_feasible, euclidean
@@ -8,6 +8,7 @@ def nearest_neighbor_constructor(
     depot: Customer,
     customers: List[Customer],
     vehicles: List[Vehicle],
+    dist_fn: Optional[Callable] = None,
 ) -> Solution:
     """
     Greedy nearest neighbor VRP constructor.
@@ -32,19 +33,19 @@ def nearest_neighbor_constructor(
                 break
 
             # Choose nearest feasible customer
+            _dist = dist_fn if dist_fn is not None else euclidean
             next_customer = min(
                 feasible,
-                key=lambda c: euclidean(current_location, c)
+                key=lambda c: _dist(current_location, c)
             )
 
             route.add_customer(next_customer)
             unassigned.remove(next_customer)
             current_location = next_customer
 
+        # Always add route (even if empty) so dynamic insertions can use
+        # unused vehicles when new customers arrive.
         solution.add_route(route)
-
-        if not unassigned:
-            break
 
     return solution
 

@@ -1,5 +1,5 @@
 from copy import deepcopy
-from typing import Optional
+from typing import Callable, Optional
 
 from dvrp.models import Customer, Solution
 from dvrp.cost import route_distance, is_capacity_feasible
@@ -9,6 +9,7 @@ def insert_customer_best_position(
     depot: Customer,
     solution: Solution,
     new_customer: Customer,
+    dist_fn: Optional[Callable] = None,
 ) -> Optional[Solution]:
     """
     Insert a new customer into the best feasible position
@@ -28,7 +29,7 @@ def insert_customer_best_position(
         ):
             continue
 
-        original_cost = route_distance(depot, route.customers)
+        original_cost = route_distance(depot, route.customers, dist_fn)
 
         # Try all insertion positions
         for pos in range(len(route.customers) + 1):
@@ -38,7 +39,7 @@ def insert_customer_best_position(
                 + route.customers[pos:]
             )
 
-            new_cost = route_distance(depot, candidate_customers)
+            new_cost = route_distance(depot, candidate_customers, dist_fn)
             delta = new_cost - original_cost
 
             if delta < best_delta:
